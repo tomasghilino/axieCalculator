@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import CantidadSlp from './CantidadSlp';
 import * as StyledComponents from './StyledComponents';
+import { css } from '@emotion/react';
+import appContext from '../context/app/appContext';
 
 const {
   Ronda,
@@ -12,38 +14,20 @@ const {
   Boton,
   DivSlp,
   GifAxie,
+  Corazon,
 } = StyledComponents;
 
 const App = () => {
-  const [energia, setEnergia] = useState(3);
+  const AppContext = useContext(appContext);
+  const { ronda, energia, restarEnergia, sumarEnergia, siguienteRonda, reset } =
+    AppContext;
 
-  const [ronda, setRonda] = useState(1);
+  useEffect(() => {
+    ronda < 10
+      ? (document.body.style.backgroundColor = '#01132e')
+      : (document.body.style.backgroundColor = '#250000');
+  }, [ronda]);
 
-  const sumarEnergia = () => {
-    if (energia !== 10) {
-      setEnergia(energia + 1);
-    }
-  };
-
-  const restarEnergia = () => {
-    if (energia !== 0) {
-      setEnergia(energia - 1);
-    }
-  };
-
-  const siguienteRonda = () => {
-    if (energia === 9) {
-      sumarEnergia();
-    } else if (energia !== 10) {
-      setEnergia(energia + 2);
-    }
-    setRonda(ronda + 1);
-  };
-
-  const reset = () => {
-    setEnergia(3);
-    setRonda(1);
-  };
   return (
     <div className="mt-5">
       <Div>
@@ -53,18 +37,30 @@ const App = () => {
           <Energia>{energia}/10</Energia>
         </EnergiaContainer>
         <BotonesContainer>
-          <Boton onClick={restarEnergia}>- 1 Energía</Boton>
-          <Boton onClick={sumarEnergia}>+ 1 Energía</Boton>
-          <Boton onClick={siguienteRonda} bgColor="#ee516b">
+          <Boton onClick={() => restarEnergia()}>- 1 Energía</Boton>
+          <Boton onClick={() => sumarEnergia()}>+ 1 Energía</Boton>
+          <Boton onClick={() => siguienteRonda()} bgColor="#ee516b">
             Siguiente Ronda
           </Boton>
-          <Boton onClick={reset} bgColor="#9c0d5a">
+          <Boton onClick={() => reset()} bgColor="#9c0d5a">
             Reset
           </Boton>
         </BotonesContainer>
 
         <DivSlp>
-          <GifAxie src="/axiegif.gif" alt="axie gif" />
+          {ronda < 10 ? (
+            <>
+              <GifAxie src="/axiegif.gif" alt="axie gif" />
+            </>
+          ) : (
+            <div
+              css={css`
+                margin: 5rem auto;
+              `}
+            >
+              <Corazon />
+            </div>
+          )}
 
           <CantidadSlp />
         </DivSlp>

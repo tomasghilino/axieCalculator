@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import * as gtag from '../lib/gtag';
+import AppState from '../context/app/appState';
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -36,7 +37,9 @@ const App = ({ Component, pageProps }) => {
           `,
         }}
       />
-      <Component {...pageProps} />
+      <AppState>
+        <Component {...pageProps} />
+      </AppState>
     </>
   );
 };

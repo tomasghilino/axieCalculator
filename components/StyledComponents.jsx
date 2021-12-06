@@ -1,5 +1,47 @@
 import styled from '@emotion/styled';
 
+export const Corazon = styled.div`
+  position: relative;
+  width: 160px;
+  height: 160px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+    left: 80px;
+    top: 0;
+    width: 80px;
+    height: 140px;
+    background: #660101;
+    border-radius: 80px 80px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    animation: pulsecolor 0.9s infinite;
+    transition: 1s ease-in-out;
+  }
+
+  &:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+    animation: pulsecolor 0.9s infinite;
+    transition: 1s ease-in-out;
+  }
+
+  @keyframes pulse {
+    10% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes pulsecolor {
+    10% {
+      background: #d10c0c;
+    }
+  }
+`;
+
 export const Ronda = styled.p`
   color: white;
   background-color: #3535df;
@@ -15,10 +57,11 @@ export const ImagenEnergia = styled.img`
 `;
 
 export const Energia = styled.p`
-  color: white;
+  color: #ffffff;
 
   font-size: 5.2rem;
   font-family: 'Roboto', sans-serif;
+  transition: 1s ease-in;
 `;
 
 export const EnergiaContainer = styled.div`
@@ -67,6 +110,7 @@ export const BotonesContainer = styled.div`
 export const GifAxie = styled.img`
   grid-area: 'gif';
   margin: 0 auto;
+  transition: 0.8s ease-in-out;
 `;
 
 export const Div = styled.div`

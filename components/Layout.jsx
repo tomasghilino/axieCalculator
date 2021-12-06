@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import { Global, css } from '@emotion/react';
 import Footer from './Footer';
+import appContext from '../context/app/appContext';
 
 const Layout = ({ children }) => {
+  const AppContext = useContext(appContext);
+  const { ronda } = AppContext;
+
   return (
     <>
       <Global
@@ -22,7 +26,8 @@ const Layout = ({ children }) => {
             font-size: 1.6rem; /*16px*/
             line-height: 1.5;
             font-family: 'PT Sans', sans-serif;
-            background: rgb(1, 19, 46);
+            background: #01132e;
+            transition: 0.5s ease-in-out;
 
             background-repeat: no-repeat;
             height: 100vh;
